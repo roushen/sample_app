@@ -1,13 +1,11 @@
 source 'http://rubygems.org'
 
+gem 'rake', '0.8.7'
 gem 'rails', '3.0.7'
 gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
 
-group :development do
-  gem 'rspec-rails', '2.5.0'
-end
-
-group :test do
-  gem 'rspec', '2.5.0'
-  gem 'webrat', '0.7.1'
+group :test,:development do
+  gem 'thin', '1.2.7'
+  gem "rspec-rails", '2.5.0'
+  gem 'mocha', '0.9.12'
 end
