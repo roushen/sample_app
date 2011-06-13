@@ -31,6 +31,26 @@ describe UsersController do
       get 'new'
       response.should have_selector("title", :content => "Sign up")
     end
+    
+    it "should have a name filed" do
+      get :new
+      response.should have_selector("input[name='user[name]'][type='text']")
+    end
+    
+    it "should have an email filed" do
+      get :new
+      response.should have_selector("input[email='user[email]'][type='text']")
+    end
+    
+    it "should have a password filed" do
+      get :new
+      response.should have_selector("input[password='user[password]'][type='password']")
+    end
+    
+    it "should have a password confirmation filed" do
+      get :new
+      response.should have_selector("input[password_confirmation='user[password_confirmation]'][type='password']")
+    end
   end
   
   describe "POST 'create'" do
@@ -75,7 +95,12 @@ describe UsersController do
       it "should redirect to the user show page" do
         post :create, :user => @attr
         response.should redirect_to(user_path(assigns(:user)))
-      end    
+      end
+      
+      it "should have a welcome message" do
+        post :create, :user => @attr
+        flash[:success].should =~ /welcome to the sample app/i
+      end
     end
   end
 end
